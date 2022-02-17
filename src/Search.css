@@ -1,0 +1,10 @@
+.Search form {
+  opacity: 0.6;
+  font-size: 20px;
+  text-align: center;
+  padding: 30px;
+}
+.Search .button {
+  opacity: 0.8;
+  font-size: 17px;
+}
