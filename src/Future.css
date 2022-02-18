@@ -1,9 +1,6 @@
 .Future {
   text-align: center;
 }
-.Future .col {
-  opacity: 0.6;
-}
 .Future .high {
   font-weight: bold;
 }

@@ -18,19 +18,21 @@ export default function Weather() {
       <div className="row">
         <div className="col-5">
           <div className="local">
-            <h2>{weatherData.city}</h2>
-            <h3>{weatherData.date}</h3>
-            <h3>Last updated: {weatherData.time} local time</h3>
+            <h1>{weatherData.city}</h1>
+            <ul>
+              <li>{weatherData.date}</li>
+              <li>Last updated: {weatherData.time} local time</li>
+            </ul>
           </div>
         </div>
         <div className="col-2">
           <div className="weather">
             <img src="/" alt={weatherData.description} />
           </div>
-          <h4>{weatherData.description}</h4>
+          <div className="description">{weatherData.description}</div>
         </div>
         <div className="col-3">
-          <h1>{weatherData.temp}</h1>
+          <h2>{weatherData.temp}</h2>
         </div>
         <div className="col-2">
           <div className="moreInfo">
@@ -40,8 +42,10 @@ export default function Weather() {
               </div>
             </div>
             <div className="conditions">
-              <div>Humidity: {weatherData.humidity}%</div>
-              <div>Wind: {weatherData.wind}m/s</div>
+              <ul>
+                <li>Humidity: {weatherData.humidity}%</li>
+                <li>Wind: {weatherData.wind}m/s</li>
+              </ul>
             </div>
           </div>
         </div>

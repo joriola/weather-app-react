@@ -12,7 +12,7 @@ export default function App() {
             href="https://github.com/joriola/weather-app-react"
             target="_blank"
             rel="noreferrer"
-            class="github-link"
+            className="github-link"
           >
             Open-source code
           </a>
