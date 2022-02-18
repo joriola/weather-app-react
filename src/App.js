@@ -1,15 +1,24 @@
-import "./App.css";
 import Weather from "./Weather";
 import "bootstrap/dist/css/bootstrap.css";
-import Source from "./Source";
+import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <Weather />
-      <Source />
+      <div className="container">
+        <Weather />
+        <footer>
+          <a
+            href="https://github.com/joriola/weather-app-react"
+            target="_blank"
+            rel="noreferrer"
+            class="github-link"
+          >
+            Open-source code
+          </a>
+          <span> by Jasmine Oriola</span>
+        </footer>
+      </div>
     </div>
   );
 }
-
-export default App;
