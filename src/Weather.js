@@ -3,6 +3,7 @@ import "./Weather.css";
 import Search from "./Search";
 import Future from "./Future";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
@@ -10,8 +11,7 @@ export default function Weather(props) {
     setWeatherData({
       ready: true,
       city: response.data.name,
-      date: "Tuesday",
-      time: "10:00",
+      today: new Date(response.data.dt * 1000),
       icon: response.data.weather[0].icon,
       description: response.data.weather[0].description,
       temperature: response.data.main.temp,
@@ -27,8 +27,9 @@ export default function Weather(props) {
             <div className="local">
               <h1>{weatherData.city}</h1>
               <ul>
-                <li>{weatherData.date}</li>
-                <li>Last updated: {weatherData.time} local time</li>
+                <li>
+                  <FormattedDate date={weatherData.today} />
+                </li>
               </ul>
             </div>
           </div>
