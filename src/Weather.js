@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Weather.css";
-import Future from "./Future";
+import Forecast from "./Forecast";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
 import Icon from "./Icon";
@@ -12,6 +12,7 @@ export default function Weather(props) {
   function handleResponse(response) {
     setWeatherData({
       ready: true,
+      coordinates: response.data.coord,
       city: response.data.name,
       date: new Date(response.data.dt * 1000),
       icon: response.data.weather[0].icon,
@@ -49,7 +50,7 @@ export default function Weather(props) {
           </div>
           <div className="col-2">
             <div className="weather">
-              <Icon code={weatherData.icon} />
+              <Icon code={weatherData.icon} size={128} />
             </div>
             <div className="text-capitalize description">
               {weatherData.description}
@@ -78,7 +79,7 @@ export default function Weather(props) {
             className="btn btn-primary"
           />
         </form>
-        <Future />
+        <Forecast coordinates={weatherData.coordinates} />
       </div>
     );
   } else {

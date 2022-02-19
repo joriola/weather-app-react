@@ -16,22 +16,24 @@ export default function Conversion(props) {
   }
   if (unit === "celsius") {
     return (
-      <div className="row Conversion">
-        <div className="col-7">
-          <h2>{Math.round(props.celsius)}</h2>
-        </div>
-        <div className="col-5">
-          <div className="units">
-            °C |{" "}
-            <a href="/" onClick={showFahrenheit}>
-              °F
-            </a>
+      <div className="Conversion">
+        <div className="row">
+          <div className="col-7">
+            <h2>{Math.round(props.celsius)}</h2>
           </div>
-          <div className="conditions">
-            <ul>
-              <li>Humidity: {props.humidity}%</li>
-              <li>Wind: {Math.round(props.wind)}m/s</li>
-            </ul>
+          <div className="col-5">
+            <div className="units">
+              °C |{" "}
+              <a href="/" onClick={showFahrenheit}>
+                °F
+              </a>
+            </div>
+            <div className="conditions">
+              <ul>
+                <li>Humidity: {props.humidity}%</li>
+                <li>Wind: {Math.round(props.wind)}m/s</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
