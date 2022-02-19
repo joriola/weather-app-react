@@ -4,6 +4,7 @@ import Future from "./Future";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
 import Icon from "./Icon";
+import Conversion from "./Conversion";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
@@ -54,23 +55,12 @@ export default function Weather(props) {
               {weatherData.description}
             </div>
           </div>
-          <div className="col-3">
-            <h2>{Math.round(weatherData.temperature)}</h2>
-          </div>
-          <div className="col-2">
-            <div className="moreInfo">
-              <div className="units">
-                <div className="celsius">
-                  <a href="/">°C</a> | <a href="/">°F</a>
-                </div>
-              </div>
-              <div className="conditions">
-                <ul>
-                  <li>Humidity: {weatherData.humidity}%</li>
-                  <li>Wind: {Math.round(weatherData.wind)}m/s</li>
-                </ul>
-              </div>
-            </div>
+          <div className="col-5">
+            <Conversion
+              celsius={weatherData.temperature}
+              humidity={weatherData.humidity}
+              wind={weatherData.wind}
+            />
           </div>
         </div>
         <form onSubmit={handleSubmit}>
