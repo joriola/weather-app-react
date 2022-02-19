@@ -1,23 +1,35 @@
 import React, { useState } from "react";
 import "./Weather.css";
-import Search from "./Search";
 import Future from "./Future";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
+  let [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
     setWeatherData({
       ready: true,
       city: response.data.name,
-      today: new Date(response.data.dt * 1000),
+      date: new Date(response.data.dt * 1000),
       icon: response.data.weather[0].icon,
       description: response.data.weather[0].description,
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
     });
+  }
+  function search() {
+    let apiKey = "63493f6a61b05c9dd9c1688ad634683f";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+  function handleCityChange(event) {
+    setCity(event.target.value);
   }
   if (weatherData.ready) {
     return (
@@ -28,7 +40,7 @@ export default function Weather(props) {
               <h1>{weatherData.city}</h1>
               <ul>
                 <li>
-                  <FormattedDate date={weatherData.today} />
+                  <FormattedDate date={weatherData.date} />
                 </li>
               </ul>
             </div>
@@ -60,14 +72,26 @@ export default function Weather(props) {
             </div>
           </div>
         </div>
-        <Search />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="search"
+            placeholder="change city..."
+            className="city-input"
+            autoFocus="on"
+            onChange={handleCityChange}
+          />
+          <input type="submit" value="SEARCH" className="btn btn-secondary" />
+          <input
+            type="button"
+            value="my location"
+            className="btn btn-primary"
+          />
+        </form>
         <Future />
       </div>
     );
   } else {
-    let apiKey = "63493f6a61b05c9dd9c1688ad634683f";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
+    search();
     return "Loading...";
   }
 }

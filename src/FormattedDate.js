@@ -38,12 +38,14 @@ export default function FormattedDate(props) {
   }
   return (
     <div className="Date">
-      <div>
-        {day}, {month} {date}, {year}
-      </div>
-      <div>
-        Last updated: {hour}:{minutes} local time
-      </div>
+      <ul>
+        <li>
+          {day}, {month} {date}, {year}
+        </li>
+        <li>
+          Last updated: {hour}:{minutes} local time
+        </li>
+      </ul>
     </div>
   );
 }
