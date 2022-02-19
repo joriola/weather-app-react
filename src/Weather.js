@@ -3,6 +3,7 @@ import "./Weather.css";
 import Future from "./Future";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
+import Icon from "./Icon";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
@@ -47,7 +48,7 @@ export default function Weather(props) {
           </div>
           <div className="col-2">
             <div className="weather">
-              <img src="/" alt="cloudy" />
+              <Icon code={weatherData.icon} />
             </div>
             <div className="text-capitalize description">
               {weatherData.description}
