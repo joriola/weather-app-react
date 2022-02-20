@@ -40,11 +40,12 @@ export default function FormattedDate(props) {
     <div className="Date">
       <ul>
         <li>
-          {day}, {month} {date}, {year}
+          Last Updated: {hour}:{minutes}
         </li>
         <li>
-          Last updated: {hour}:{minutes} local time
+          {day}, {month} {date}, {year}
         </li>
+        <li>Local Time</li>
       </ul>
     </div>
   );

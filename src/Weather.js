@@ -3,8 +3,6 @@ import "./Weather.css";
 import Forecast from "./Forecast";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
-import Icon from "./Icon";
-import Conversion from "./Conversion";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
@@ -34,6 +32,14 @@ export default function Weather(props) {
   function handleCityChange(event) {
     setCity(event.target.value);
   }
+  function currentLocation(position) {
+    let locationApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=63493f6a61b05c9dd9c1688ad634683f&units=metric`;
+    axios.get(locationApiUrl).then(handleResponse);
+  }
+  function displayCurrentLocation(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(currentLocation);
+  }
   if (weatherData.ready) {
     return (
       <div className="Weather">
@@ -41,27 +47,36 @@ export default function Weather(props) {
           <div className="col-5">
             <div className="local">
               <h1>{weatherData.city}</h1>
-              <ul>
-                <li>
-                  <FormattedDate date={weatherData.date} />
-                </li>
-              </ul>
+              <FormattedDate date={weatherData.date} />
             </div>
           </div>
           <div className="col-2">
             <div className="weather">
-              <Icon code={weatherData.icon} size={128} />
+              <img
+                src={`/images/${weatherData.icon}.png`}
+                alt={weatherData.description}
+                className="img-fluid"
+              />
             </div>
             <div className="text-capitalize description">
               {weatherData.description}
             </div>
           </div>
-          <div className="col-5">
-            <Conversion
-              celsius={weatherData.temperature}
-              humidity={weatherData.humidity}
-              wind={weatherData.wind}
-            />
+          <div className="col-3">
+            <div className="temperature">
+              <h2>{Math.round(weatherData.temperature)}</h2>
+            </div>
+          </div>
+          <div className="col-2">
+            <div className="more-info">
+              <div className="units">°C</div>
+              <div className="conditions">
+                <ul>
+                  <li>Humidity: {weatherData.humidity}%</li>
+                  <li>Wind: {Math.round(weatherData.wind)}m/s</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         <form onSubmit={handleSubmit}>
@@ -72,11 +87,16 @@ export default function Weather(props) {
             autoFocus="on"
             onChange={handleCityChange}
           />
-          <input type="submit" value="SEARCH" className="btn btn-secondary" />
+          <input
+            type="submit"
+            value="SEARCH"
+            className="btn btn-secondary m-1"
+          />
           <input
             type="button"
             value="my location"
             className="btn btn-primary"
+            onClick={displayCurrentLocation}
           />
         </form>
         <Forecast coordinates={weatherData.coordinates} />
