@@ -55,21 +55,16 @@ export default function Weather(props) {
               <img
                 src={`/images/${weatherData.icon}.png`}
                 alt={weatherData.description}
-                className="img-fluid"
+                width={64}
               />
             </div>
             <div className="text-capitalize description">
               {weatherData.description}
             </div>
           </div>
-          <div className="col-3">
+          <div className="col-5 d-flex justify-content-end">
             <div className="temperature">
-              <h2>{Math.round(weatherData.temperature)}</h2>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="more-info">
-              <div className="units">°C</div>
+              <h2>{Math.round(weatherData.temperature)}°C</h2>
               <div className="conditions">
                 <ul>
                   <li>Humidity: {weatherData.humidity}%</li>

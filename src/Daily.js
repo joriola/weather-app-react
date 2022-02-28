@@ -20,7 +20,7 @@ export default function Daily(props) {
       <img
         src={`/images/${props.data.weather[0].icon}.png`}
         alt={props.data.weather[0].description}
-        className="img-fluid"
+        width={64}
       />
       <div className="day">{day()}</div>
       <div className="temp">
